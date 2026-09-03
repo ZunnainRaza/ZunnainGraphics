@@ -60,7 +60,7 @@ document.addEventListener("click", (e) => {
 });
 
 /**
- * Mobile Navigation Drawer Toggle
+ * Mobile Navigation Drawer Toggle & Close on Outside Click
  */
 document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menuToggle");
@@ -68,7 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.querySelectorAll(".nav-link");
 
     if (menuToggle && navMenu) {
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
             navMenu.classList.toggle("open");
             const icon = menuToggle.querySelector("i");
             if (icon) {
@@ -87,6 +88,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     icon.classList.remove("fa-xmark");
                 }
             });
+        });
+
+        // Close Mobile Nav when clicking outside
+        document.addEventListener("click", (e) => {
+            if (navMenu.classList.contains("open") && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove("open");
+                const icon = menuToggle.querySelector("i");
+                if (icon) {
+                    icon.classList.add("fa-bars-staggered");
+                    icon.classList.remove("fa-xmark");
+                }
+            }
         });
     }
 });
@@ -262,6 +275,55 @@ document.addEventListener("keydown", (e) => {
         nextLightboxImage();
     }
 });
+
+// Touch Swipe Support for Lightbox on Mobile Devices
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const lightboxModal = document.getElementById("lightboxModal");
+    if (lightboxModal) {
+        lightboxModal.addEventListener("touchstart", (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightboxModal.addEventListener("touchend", (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+    }
+
+    // Attach click directly on whole portfolio card for mobile touch convenience
+    document.querySelectorAll(".portfolio-card").forEach(card => {
+        card.addEventListener("click", (e) => {
+            // Prevent if clicked on WhatsApp button specifically
+            const waBtn = e.target.closest("button");
+            if (waBtn && waBtn.getAttribute("onclick") && waBtn.getAttribute("onclick").includes("openWhatsApp")) {
+                return;
+            }
+            const img = card.querySelector("img");
+            const titleEl = card.querySelector(".item-title");
+            const catEl = card.querySelector(".item-category");
+            if (img) {
+                const src = img.getAttribute("src");
+                const title = titleEl ? titleEl.textContent : "";
+                const category = catEl ? catEl.textContent : "";
+                openLightbox(src, title, category);
+            }
+        });
+    });
+});
+
+function handleSwipe() {
+    const threshold = 45; // minimum swipe distance in px
+    if (touchEndX < touchStartX - threshold) {
+        // Swiped Left -> Next Image
+        nextLightboxImage();
+    } else if (touchEndX > touchStartX + threshold) {
+        // Swiped Right -> Prev Image
+        prevLightboxImage();
+    }
+}
 
 /**
  * ==========================================================================
