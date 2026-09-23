@@ -483,7 +483,7 @@ const portfolioData = [
         src: "Logo3.jpeg",
         title: "Sarkar Travels Luxury Monogram",
         category: "Logo Design"
-    }
+    },
 
 ];
 
