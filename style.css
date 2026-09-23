@@ -3895,3 +3895,59 @@ a:focus-visible {
 .about-qr-col{
     font-family: sans-serif;
 }
+
+/* ==========================================================================
+   RESPONSIVE - MOBILE BADGES FIX
+   ========================================================================== */
+
+@media (max-width: 576px) {
+
+    .visual-card {
+        height: 420px;
+    }
+
+    .floating-badge {
+        min-width: 165px;
+
+        padding: 7px 9px;
+
+        gap: 7px;
+
+        border-radius: 10px;
+
+        box-shadow: 3px 3px 0 var(--black);
+    }
+
+    .badge-icon {
+        width: 28px;
+        height: 28px;
+
+        border-radius: 7px;
+        font-size: .7rem;
+    }
+
+    .floating-badge strong {
+        font-size: .62rem;
+    }
+
+    .floating-badge small {
+        font-size: .52rem;
+        margin-top: 2px;
+    }
+
+    .badge-top-left {
+        top: 10px;
+        left: -10px;
+    }
+
+    .badge-bottom-right {
+        right: -10px;
+        bottom: 10px;
+    }
+
+    .character-image {
+        max-width: 78%;
+        max-height: 85%;
+    }
+
+}
