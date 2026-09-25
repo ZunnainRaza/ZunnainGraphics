@@ -485,6 +485,40 @@ const portfolioData = [
         category: "Logo Design"
     },
 
+    /* ==============================================================
+       Business-Card
+       ============================================================== */
+
+    {
+        src: "business-card.jpeg",
+        title: "Zunnain-businessCard",
+        category: "business-card"
+    },
+
+    {
+        src: "business-card2.jpeg",
+        title: "MN-PHYSIOCARE",
+        category: "business-card"
+    },
+
+    {
+        src: "business-card3.jpeg",
+        title: "MN-PHYSIOCARE",
+        category: "business-card"
+    },
+
+    {
+        src: "business-card4.jpeg",
+        title: "ARABIAN-MEHFIL",
+        category: "business-card"
+    },
+
+    {
+        src: "business-card5.jpeg",
+        title: "ARABIAN-MEHFIL",
+        category: "business-card"
+    },
+
 ];
 
 
